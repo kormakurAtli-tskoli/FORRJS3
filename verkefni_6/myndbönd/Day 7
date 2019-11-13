@@ -32,14 +32,18 @@
     //     return true;
     //   }
     // });
+    
 
     const isAdult = people.some(person => ((new Date()).getFullYear()) - person.year >= 19);
 
     console.log({isAdult});
+    //Hérna athugar hann með .some() hvort það sé að minnsta kosti ein manneskja í arrayinu sem er 19 ára.
+    
     // Array.prototype.every() // is everyone 19?
 
     const allAdults = people.every(person => ((new Date()).getFullYear()) - person.year >= 19);
     console.log({allAdults});
+    //Hérna athugarann hvort allir séu 19 ára, með nákvæmlega sömu línu og áðan, nema með every í staðin fyrir some
 
     // Array.prototype.find()
     // Find is like filter, but instead returns just the one you are looking for
@@ -49,6 +53,7 @@
     const comment = comments.find(comment => comment.id === 823423);
 
     console.log(comment);
+    //Hérna notar hann find til að finna kommentið með id 823423
 
     // Array.prototype.findIndex()
     // Find the comment with this ID
@@ -62,6 +67,7 @@
       ...comments.slice(0, index),
       ...comments.slice(index + 1)
     ];
+    //Hérna tekur finnur hann index staks sem hann þarf að eyða og eyðir því síðan með því að búa til nýjann array með öllu nema því sem hann vildi eyða
 
   </script>
 </body>
