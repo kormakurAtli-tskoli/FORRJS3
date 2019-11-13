@@ -13,12 +13,14 @@
     // console.log(age, age2);
     // age = 200;
     // console.log(age, age2);
+    //Hérna breytist age2 ekki því gildi age2 var sett sem sama og gildi age þegar gildi age var 100
 
     // let name = 'Wes';
     // let name2 = name;
     // console.log(name, name2);
     // name = 'wesley';
     // console.log(name, name2);
+    //Hérna gerist það sama og áðan, nema núna með strengjum en ekki tölum
 
     // Let's say we have an array
     const players = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
@@ -29,6 +31,7 @@
     console.log(players, team);
     // You might think we can just do something like this:
     // team[3] = 'Lux';
+    //Hérna er team ekki afrit, heldur eins konar tilvísun í players
 
     // however what happens when we update that array?
 
@@ -45,13 +48,16 @@
 
     // or create a new array and concat the old one in
     const team3 = [].concat(players);
+    // Þetta virkar sem afrit
 
     // or use the new ES6 Spread
     const team4 = [...players];
     team4[3] = 'heeee hawww';
     console.log(team4);
+    // Þetta virkar líka sem afrit
 
     const team5 = Array.from(players);
+     // Og þetta
 
     // now when we update it, the original one isn't changed
 
