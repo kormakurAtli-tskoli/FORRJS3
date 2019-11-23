@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html style="font-family: arial">
+<title>liður 2</title>
+
+<body>
+ <div id="container"></div>
+</body>
+</html>
+<script type="text/javascript">
+	document.getElementById("container").innerHTML = "<h1>Kormákur</h1>";
+	var cont = document.createElement("div");
+	cont.style.cssText = "border: 5px black solid;"
+	document.getElementById("container").append(cont);
+	var head = document.createElement("h2");
+	head.innerText = "Verkefni 5.1"
+	cont.append(head);
+	var ol = document.createElement("ol");
+		cont.append(ol);
+	function spurning(spurt,svarad,kodi=undefined) {
+		var spurning = document.createElement("li");
+		spurning.innerText = spurt
+		ol.append(spurning);
+		if (kodi != undefined){
+			var kodinn = document.createElement("pre");
+			kodinn.innerText = kodi
+			spurning.append(kodinn);			
+		}
+		var svar = document.createElement("p");
+		svar.style.cssText = "padding-left:20px;padding-top:5px;color:red;"
+		svar.innerText = svarad
+		spurning.append(svar);
+	}
+	spurning(
+		"Afhverju er getElementById() fljótleglegasta aðferðin?",
+		"Vegna þess að það er beint kall í javascript."
+		)
+	spurning(
+		"Hvað er málið með auða hnúta (e. whitespace nodes) og DOM tréið?",
+		"Auðir hnútar sem line break, tab og fleira bæta hverjir við grein í DOM tréið."
+		)
+	spurning(
+		"Hvað er static og live NodeList, hver er munurinn á NodeList og HTMLCollection?",
+		"Live NodeList söfn geta breyst samkvæmt breytingum í DOMinu, static NodeList söfn gera það ekki. HTML Collection söfn eru alltaf live."
+		)
+	spurning(
+		"Hvað er event í eftirfarandi kóða og hvað er gert með því?",
+		"Eventið í þessum kóða er þegar ýtt er á linkinn, þá skilar kóðinn 'Nope.' í console.",
+		"var spurning = document.createElement('i');\n"+
+		"spurning.innerText = spurt\n"+
+		"ol.append(spurning);"
+		)
+	spurning(
+		"Af þremur leiðum til að binda event þá er AddEventListener() nýjust en afhverju er hún betri en hinar?",
+		"addEventListener leyfir þér að hafa fleiri en einn listener fyrir einn event, en það er ekki hægt með onclick."
+		)
+	spurning(
+		"Hver er munurinn á true og false í AddEventListener?",
+		"Boolean sem segir hvort þurfi að grípa eventinn eða ekki.",
+		'elem.addEventListener("click", handlerFunction, true);\n'+
+ 		'elem.addEventListener("click", handlerFunction, false);'
+		)
+	spurning(
+		"this vísar í Event listener á html element en ekki á object. Þú getur notað bind() til að breyta því, leystu eftirfarandi kóðadæmi með notkun á bind() til að birta í console “My name is Sam“ en ekki undefined.",
+		"Breyta neðstu línunni í: buttonEl.addEventListener('click', Person.sayName.bind(Person));",
+		'let Person = {\n'+
+ 		'name: "Sam",\n'+
+ 		'sayName: function(){\n'+
+ 		'console.log("My name is "+ this.name);\n'+
+ 		'}\n'+
+		'};\n'+
+		'buttonEl.addEventListener("click", Person.sayName);'
+		)
+
+	
+</script>
