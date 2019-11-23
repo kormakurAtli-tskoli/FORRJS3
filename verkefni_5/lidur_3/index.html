@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html style="font-family: arial">
+<title>liður 3</title>
+
+<body>
+ <div id="container"></div>
+</body>
+</html>
+<script type="text/javascript">
+	var allarSpurningar = [];
+	var o = 0;
+	var flag = false;
+	var answer = ""
+	function spurning(a,b,c="Rangt",d="Rangt",e="Rangt") {
+  		this.spurning = a;
+  		this.rettSvar = b;
+  		this.rangtSvar = c;
+  		if (d !== undefined){
+  			if (e === undefined){
+  				Error('Stökin í smiðnum verða að vera annaðhvort þrjú eða fimm, alls ekki fjögur!');
+  			} else{
+				this.rangtSvar2 = d;
+				this.rangtSvar3 = e;
+			}			
+		}
+	}
+	function svarmoguleiki(a,b){
+		var svar = document.createElement("button");
+		svar.innerText = a;
+		svar.setAttribute("id",b);
+		svar.setAttribute("class","buttons");
+		cont.append(svar);
+	}
+	function birtaSpurningu(i){
+		var spurning = document.createElement("h2");
+		spurning.innerText = allarSpurningar[i].spurning;
+		spurning.setAttribute("id","spurningin");
+		cont.append(spurning);
+
+		svarmoguleiki(allarSpurningar[i].rettSvar,"rett");
+		svarmoguleiki(allarSpurningar[i].rangtSvar,"rangt");
+/*
+		var rettSvar = document.createElement("button");
+		rettSvar.innerText = allarSpurningar[i].rettSvar;
+		cont.append(rettSvar);
+
+		var rangtSvar = document.createElement("button");
+		rangtSvar.innerText = allarSpurningar[i].rangtSvar;
+		cont.append(rangtSvar);  
+		*/
+
+		if (allarSpurningar[i].rangtSvar2 !== undefined){
+/*
+			var rangtSvar = document.createElement("button");
+			rangtSvar.innerText = allarSpurningar[i].rangtSvar;
+			cont.append(rangtSvar);
+
+			var rangtSvar = document.createElement("button");
+			rangtSvar.innerText = allarSpurningar[i].rangtSvar;
+		    cont.append(rangtSvar);
+		 */   
+		 svarmoguleiki(allarSpurningar[i].rangtSvar2,"rangt2");
+		 svarmoguleiki(allarSpurningar[i].rangtSvar3,"rangt3");
+		}
+	};
+	function breytaSpurningu(i){
+		document.getElementById("spurningin").innerHTML = allarSpurningar[i].spurning;
+		document.getElementById("rett").innerHTML = allarSpurningar[i].rettSvar;
+		document.getElementById("rangt").innerHTML = allarSpurningar[i].rangtSvar;
+		document.getElementById("rangt2").innerHTML = allarSpurningar[i].rangtSvar2;
+		document.getElementById("rangt3").innerHTML = allarSpurningar[i].rangtSvar3;
+		document.getElementById("box").style = "border: 5px black solid;background-color:white;";
+
+		 document.getElementById('rangt2').remove(); 
+		 document.getElementById('rangt').remove(); 
+	};
+	var spurning_1 = new spurning("Hver er núverandi forseti Íslands? (2019)", "Guðni Th. Jóhannesson", "Konráð Guðmundsson", "Bubbi Morthens","Donald J. Trump");
+	allarSpurningar.push(spurning_1); 
+	var spurning_2 = new spurning("Í nafninu Guðni Th. Jóhannesson, stendur Th. fyrir Thorarensen", "Rétt", "Rangt");
+	allarSpurningar.push(spurning_2);
+
+	document.getElementById("container").innerHTML = "<h1>Spurningaleikur</h1>";
+	var cont = document.createElement("div");
+	cont.setAttribute("id","box");
+	cont.style.cssText = "border: 5px black solid;";
+	document.getElementById("container").append(cont);
+
+
+		birtaSpurningu(o);
+
+		document.getElementById("rett").addEventListener("click", function(){ 
+			answer = "lime;"
+		});
+		document.getElementById("rangt").addEventListener("click", function(){ 
+			answer = "red;"
+		});
+		document.getElementById("rangt2").addEventListener("click", function(){ 
+			answer = "red;" 
+		});
+		document.getElementById("rangt3").addEventListener("click", function(){ 
+			answer = "red;" 
+		});
+
+		var classname = document.getElementsByClassName("buttons");
+
+		for (var i = 0; i < classname.length; i++) {
+		    classname[i].addEventListener('click', function() {
+
+		    	o++;
+
+		    	document.getElementById("box").style = "border: 5px black solid;background-color:"+answer;
+		    	setTimeout(function(){ breytaSpurningu(o); }, 2000);
+  				
+  				flag = true;
+			}, false);
+		}
+
+		if (flag === true){
+			var r = 1;
+		};
+  		
+
+
+
+	
+	
+</script>
