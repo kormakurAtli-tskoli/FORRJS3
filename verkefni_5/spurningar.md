@@ -21,7 +21,7 @@ betri en hinar?<br>
  elem.addEventListener("click", handlerFunction, true);
  elem.addEventListener("click", handlerFunction, false);
  ```
-+_Boolean sem segir hvort þurfi að grípa eventinn eða ekki._
++ _Boolean sem segir hvort þurfi að grípa eventinn eða ekki._
 7. this vísar í Event listener á html element en ekki á object. Þú getur notað bind() til að
 breyta því, leystu eftirfarandi kóðadæmi með notkun á bind() til að birta í console “My
 name is Sam“ en ekki undefined.
@@ -35,7 +35,7 @@ let Person = {
 };
 buttonEl.addEventListener('click', Person.sayName);
 ```
-+_Breyta neðstu línunni í:_
++ _Breyta neðstu línunni í:_
 ```js
 buttonEl.addEventListener('click', Person.sayName.bind(Person));
 ```
