@@ -1,0 +1,78 @@
+#rocket{
+  position: absolute;
+  left: 50px;
+  bottom: 0;
+  width: 50px;
+  transition: top 0.5s, left 0.5s;
+}
+
+.instructions {
+  margin-top: 100px;
+}
+.instructions {
+  margin: auto;
+  font-size: 40px;
+  color: white;
+  position: fixed;
+  top: 100px;
+  left: 100px;
+  margin-right: 100px
+}
+#speed-counter {
+  position: fixed;
+  top: 0;
+  left: 50;
+
+}
+
+#warning {
+  position: fixed;
+  top: 50;
+  left: 50;
+  visibility: hidden;
+}
+
+#level-display {
+  top: 0;
+  position: fixed;
+}
+
+canvas {
+  border: 1px solid black;
+  background: url('starfield.jpg');
+  background-size: cover;
+}
+
+body {
+  overflow: hidden;
+  font-family: avenir;
+  color: white;
+}
+
+.bullet {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: white;
+  border-radius: 5px;
+  z-index: -2;
+  visibility: hidden;
+
+}
+
+#ammo-counter {
+  position: fixed;
+  top: 50px;
+}
+
+.shot {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  background-color: white;
+}
+
+.firing {
+  visibility: visible;
+}
