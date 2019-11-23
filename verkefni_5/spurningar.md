@@ -12,13 +12,16 @@
  event.preventDefault();
  });
  ```
++ _Eventið í þessum kóða er þegar ýtt er á linkinn, þá skilar kóðinn "Nope." í console._
 5. Af þremur leiðum til að binda event þá er AddEventListener() nýjust en afhverju er hún
 betri en hinar?<br>
++ _addEventListener leyfir þér að hafa fleiri en einn listener fyrir einn event, en það er ekki hægt með onclick._
 6. Hver er munurinn á true og false í AddEventListener?
 ```js
  elem.addEventListener("click", handlerFunction, true);
  elem.addEventListener("click", handlerFunction, false);
  ```
++_Boolean sem segir hvort þurfi að grípa eventinn eða ekki._
 7. this vísar í Event listener á html element en ekki á object. Þú getur notað bind() til að
 breyta því, leystu eftirfarandi kóðadæmi með notkun á bind() til að birta í console “My
 name is Sam“ en ekki undefined.
@@ -31,4 +34,8 @@ let Person = {
  }
 };
 buttonEl.addEventListener('click', Person.sayName);
+```
++_Breyta neðstu línunni í:_
+```js
+buttonEl.addEventListener('click', Person.sayName.bind(Person));
 ```
