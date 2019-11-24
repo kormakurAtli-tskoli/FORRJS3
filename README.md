@@ -13,3 +13,7 @@ https://kormakuratli-tskoli.github.io/FORRJS3/verkefni_5/lidur_3
 ***
 ### Verkefni 6
 https://kormakuratli-tskoli.github.io/FORRJS3/verkefni_6
+
+***
+### Verkefni 7
+https://kormakuratli-tskoli.github.io/FORRJS3/verkefni_7
