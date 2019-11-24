@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css"></style>
+	<link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+	<style type="text/css">
+		div.tiles:hover h3{
+			margin:0px;
+			transition: all 0.3s;
+			transition-timing-function: linear;
+			cursor: pointer;
+		}
+		div.tiles:hover img{
+			border-radius: 30px 30px 30px 30px;
+			transition: all 0.3s;
+			transition-timing-function: linear;
+			opacity: 0.4;
+			cursor: pointer;
+			margin-bottom: 30px;
+		};
+		div.tiles:hover{
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+<div id="container"></div>
+</body>
+</html>
+<script type="text/javascript">
+	var i = 0;
+	var allConcerts = []
+	var typur = [];
+	var cont = document.getElementById('container');
+	cont.style = "max-width:100vw;margin:auto;margin-top:25px;border:#f1f1f1 solid 5px;display:flex;flex-direction:row;flex-wrap:wrap;justify-content:space-between;align-items:stretch;padding:20px;align-content:space-around;transition: all 0.3s;transition-timing-function: linear;";
+
+	fetch('https://apis.is/concerts')
+	  .then(response => {
+	    return response.json()
+	  })
+	  .then(data => {
+	    // Work with JSON data here
+	    const allConcerts = [...data["results"]];
+	    for (t = 0;t < allConcerts.length;t++){
+	    	if (typur.includes(allConcerts[t].eventDateName) != true){
+        		
+        		var einnVidburdur = document.createElement("div");
+				einnVidburdur.setAttribute("class","tiles");
+				einnVidburdur.style = "width:23vw;height:400px;;display:flex;justify-content:space-evenly;flex-direction:column;align-self:auto;background-color:#f1f1f1;color:#3F3F3F;border-left:lightgrey solid 1px;border-right:#ebebeb solid 1px;margin-bottom:20px;border-radius:30px 30px 0 0;transition: all 0.3s;transition-timing-function: linear;"
+				cont.append(einnVidburdur);
+	        	var title = document.createElement("h3");
+	        	einnVidburdur.setAttribute("id",allConcerts[t].eventDateName);
+				title.innerText = allConcerts[t].eventDateName;
+				title.style = "item:1;text-align:center;background-color:#f1f1f1;height:25%;padding: 20px 10px 10px 10px;font-family:arial;font-family: 'Raleway', sans-serif;font-weight:lighter;border-radius:30px 30px 0 0;vertical-align:middle;transition: all 0.3s;transition-timing-function: linear;"
+				einnVidburdur.append(title);
+				var pic = document.createElement("img");
+				pic.setAttribute("src",allConcerts[t].imageSource);
+				pic.style = "max-width:100%;item:2;background-color:#f1f1f1;height:75%;transition: all 0.3s;transition-timing-function: linear;"
+				einnVidburdur.append(pic);
+				typur.push(allConcerts[t].eventDateName);
+
+        	};
+	    };
+
+	    var popin = document.createElement("div");
+				popin.setAttribute("class","popin");
+				popin.setAttribute("id","popin");
+				popin.style = "border-radius:15px;padding:5%;position:absolute;top:20%;bottom:20%;left:-4000px;right:3700px;background-color:#F8F8F8;-webkit-box-shadow: 7px 8px 16px -5px rgba(0,0,0,0.50);-moz-box-shadow: 7px 8px 16px -5px rgba(0,0,0,0.50);box-shadow: 7px 8px 16px -5px rgba(0,0,0,0.50);transition:all 0.6s;"
+				cont.append(popin);
+
+				var popbutt = document.createElement("button");
+				popbutt.setAttribute("id","popbutt");
+				popbutt.innerText = "X"
+				popbutt.style = "background-color:white;font-family:arial;float:right;font-size:2em;"
+				popin.append(popbutt);
+
+				var popimg = document.createElement("img");
+				popimg.setAttribute("id","popimg");
+				popimg.setAttribute("src","https://d30qys758zh01z.cloudfront.net/images/medium/1.11082.jpg");
+				popimg.style = "font-size:2.3em;margin:auto;text-align:center;"
+				popin.append(popimg);
+
+				var poptext = document.createElement("p");
+				poptext.setAttribute("id","poptext");
+				poptext.innerText = "Nafn tónleika\nListamaður/hópur\nSöluaðili\nStaðsetning\nDagsetningar" ;
+				poptext.style = "font-size:2.1em;margin:auto;"
+				popin.append(poptext);
+
+				console.log(typur)
+				for (let e=0;e<typur.length;e++){
+					document.getElementById(typur[e]).addEventListener("click", function(){ 
+						// if allConcerts[t].eventDateName == typur[e]
+						var dags=""
+						for (a=0;a<allConcerts.length;a++){
+							if (allConcerts[a].eventDateName == typur[e]){
+								var name = allConcerts[a].name;
+								var dateOfShow = allConcerts[a].dateOfShow;
+								var userGroupName = allConcerts[a].userGroupName;
+								var eventHallName = allConcerts[a].eventHallName;
+								var imageSource = allConcerts[a].imageSource;
+								if (dags.includes(allConcerts[a].dateOfShow) != true){
+									dags = dags +"/"+ allConcerts[a].dateOfShow;
+								};
+							};
+						};
+						var nytt = dags.split("/")
+						var dagsetningin = "";
+						console.log(nytt[1])
+						for (i=1; i< nytt.length; i++) {
+							var tvennt = nytt[i].split("T");
+							var dagsetning = tvennt[0].split("-");
+							var ds = dagsetning[2]+"."+dagsetning[1]+"."+dagsetning[0];
+							var klukkan = tvennt[1].split(":");
+							var kl = klukkan[0]+":"+klukkan[1];
+							var timasetning = ds+" - "+kl;
+							var dagsetningin = dagsetningin + timasetning+"<br>"
+						}
+						console.log(dags);
+						console.log(nytt);
+						document.getElementById("poptext").innerHTML = (typur[e]+"<br>"+name+"<br>"+userGroupName+"<br>"+eventHallName+"<br>"+dagsetningin);
+						document.getElementById("popin").style = "left:20%;right:20%;border-radius:15px;padding:5%;position:absolute;top:20%;bottom:20%;background-color:#F8F8F8;-webkit-box-shadow: 7px 8px 16px -5px rgba(0,0,0,0.50);-moz-box-shadow: 7px 8px 16px -5px rgba(0,0,0,0.50);box-shadow: 7px 8px 16px -5px rgba(0,0,0,0.50);transition:all 0.6s;"
+						document.getElementById("popimg").setAttribute("src",imageSource)
+					});
+				};
+				document.getElementById("popbutt").addEventListener("click", function(){ 
+					document.getElementById("popin").style = "left:-4000px;right:3700px;border-radius:15px;padding:5%;position:absolute;top:20%;bottom:20%;background-color:#F8F8F8;-webkit-box-shadow: 7px 8px 16px -5px rgba(0,0,0,0.50);-moz-box-shadow: 7px 8px 16px -5px rgba(0,0,0,0.50);box-shadow: 7px 8px 16px -5px rgba(0,0,0,0.50);transition:all 0.6s;"
+				});
+		
+	  })
+	  .catch(err => {
+	
+	  })
+	        	
+ 
+
+        
+</script>
