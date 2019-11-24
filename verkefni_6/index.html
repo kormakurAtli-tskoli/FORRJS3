@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link href="noUiSlider-14.0.3/noUiSlider-14.0.3/distribute/nouislider.min.css" rel="stylesheet">
+    <script src="noUiSlider-14.0.3/noUiSlider-14.0.3/distribute/nouislider.js"></script>
+	<title>liður 2</title>
+</head>
+<body>
+	<div id="slider"></div>
+	<div id="tafla"></div>
+</body>
+</html>
+<script type="text/javascript">
+var o = 0;
+var synilegir = []
+	function stofn(){
+		for (var i = 0; i < 4; i++) {
+			var rod = document.createElement("tr");
+			rod.setAttribute("id","rod"+i);
+			tafla.append(rod);
+
+			var nafn = document.createElement("td");
+			nafn.setAttribute("id","nafn"+i);
+			nafn.innerText = ""
+			rod.append(nafn);
+
+			var skor = document.createElement("td");
+			skor.setAttribute("id","skor"+i);
+			skor.innerText = ""
+			rod.append(skor);
+		};
+	};
+	function skorin(low,high) {
+		synilegir=[]
+		document.getElementById("nafn0").innerText = "";
+		document.getElementById("skor0").innerText = "";
+		document.getElementById("nafn1").innerText = "";
+		document.getElementById("skor1").innerText = "";
+		document.getElementById("nafn2").innerText = "";
+		document.getElementById("skor2").innerText = "";
+		document.getElementById("nafn3").innerText = "";
+		document.getElementById("skor3").innerText = "";
+		fylki.forEach(function vonandiVirkarThetta(x){
+			
+			if (x.skor > low && x.skor < high){
+				synilegir.push(x)
+			}
+		});
+		document.getElementById("nafn0").innerText = synilegir[0].nafn;
+		document.getElementById("skor0").innerText = synilegir[0].skor;
+		document.getElementById("nafn1").innerText = synilegir[1].nafn;
+		document.getElementById("skor1").innerText = synilegir[1].skor;
+		document.getElementById("nafn2").innerText = synilegir[2].nafn;
+		document.getElementById("skor2").innerText = synilegir[2].skor;
+		document.getElementById("nafn3").innerText = synilegir[3].nafn;
+		document.getElementById("skor3").innerText = synilegir[3].skor;
+	};
+			
+
+	var fylki = [{nafn:"Siggi",skor:48},{nafn:"Doddi",skor:12},{nafn:"Raggi",skor:89},{nafn:"Erla",skor:98}]
+
+	document.getElementById('slider').style = "width:500px;margin:auto;margin-top:50px;";
+	var parent = document.getElementById('tafla');
+	parent.style = "width:500px;margin:auto;margin-top:50px;";
+
+	var tafla = document.createElement("table");
+	tafla.setAttribute("id","tafla");
+	parent.append(tafla);
+
+	var rod = document.createElement("tr");
+	rod.setAttribute("id","rod");
+	tafla.append(rod);
+
+	var nafn = document.createElement("th");
+	nafn.setAttribute("id","nafn");
+	nafn.style = "padding:5px;";
+	nafn.innerText = "Nafn";
+	rod.append(nafn);
+
+	var skor = document.createElement("th");
+	skor.setAttribute("id","skor");
+	skor.innerText = "Skor";
+	rod.append(skor);
+
+	stofn();
+
+
+	var slider = document.getElementById('slider');
+	document.getElementById('slider').style = "width:500px;margin:auto;margin-top:500px;";
+	noUiSlider.create(slider, {
+	    start: [20, 80],
+	    connect: true,
+	    range: {
+	        'min': 0,
+	        'max': 100
+	    }
+	});
+
+	slider.noUiSlider.on('update', function (values, handle) {
+    	
+    	skorin(values[0],values[1]);
+
+
+});
+
+</script>
