@@ -22,18 +22,24 @@
 		div.tiles:hover{
 			cursor: pointer;
 		}
+		input:hover,input:active,input{
+			outline:none;
+		}
 	</style>
 </head>
 <body>
 <div id="container"></div>
 </body>
-</html>
 <script type="text/javascript">
-	var i = 0;
 	var allConcerts = []
 	var typur = [];
 	var cont = document.getElementById('container');
-	cont.style = "max-width:100vw;margin:auto;margin-top:25px;border:#f1f1f1 solid 5px;display:flex;flex-direction:row;flex-wrap:wrap;justify-content:space-between;align-items:stretch;padding:20px;align-content:space-around;transition: all 0.3s;transition-timing-function: linear;";
+	cont.style = "max-width:100vw;margin:auto;margin-top:25px;display:flex;flex-direction:row;flex-wrap:wrap;justify-content:space-between;align-items:stretch;padding:20px;align-content:space-around;transition: all 0.3s;transition-timing-function: linear;";
+
+	var leitarkassi = document.createElement("div");
+	leitarkassi.setAttribute("class","leit");
+	leitarkassi.style = "width:80%;margin:auto;";
+	cont.append(leitarkassi);
 
 	fetch('https://apis.is/concerts')
 	  .then(response => {
@@ -44,12 +50,12 @@
 	    const allConcerts = [...data["results"]];
 	    for (t = 0;t < allConcerts.length;t++){
 	    	if (typur.includes(allConcerts[t].eventDateName) != true){
-        		
         		var einnVidburdur = document.createElement("div");
 				einnVidburdur.setAttribute("class","tiles");
 				einnVidburdur.style = "width:23vw;height:400px;;display:flex;justify-content:space-evenly;flex-direction:column;align-self:auto;background-color:#f1f1f1;color:#3F3F3F;border-left:lightgrey solid 1px;border-right:#ebebeb solid 1px;margin-bottom:20px;border-radius:30px 30px 0 0;transition: all 0.3s;transition-timing-function: linear;"
 				cont.append(einnVidburdur);
 	        	var title = document.createElement("h3");
+	        	einnVidburdur.setAttribute("class","titlar");
 	        	einnVidburdur.setAttribute("id",allConcerts[t].eventDateName);
 				title.innerText = allConcerts[t].eventDateName;
 				title.style = "item:1;text-align:center;background-color:#f1f1f1;height:25%;padding: 20px 10px 10px 10px;font-family:arial;font-family: 'Raleway', sans-serif;font-weight:lighter;border-radius:30px 30px 0 0;vertical-align:middle;transition: all 0.3s;transition-timing-function: linear;"
@@ -62,6 +68,32 @@
 
         	};
 	    };
+
+	    function leitin(value) {
+		    var input, filter, ul, li, a, i, txtValue;
+		    input = document.getElementById("myInput");
+		    filter = input.value.toUpperCase();
+		    for (i = 0; i < typur.length; i++) {
+		        a = document.getElementById(typur[i])
+		        //typur[i].getElementsByTagName("a")[0];
+		        txtValue = a.textContent || a.innerText;
+		        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+   			        document.getElementById(typur[i]).style.display = "";
+        		} else {
+            		document.getElementById(typur[i]).style.display = "none";
+        		};
+    		};
+		};
+
+		var leit = document.createElement("input");
+	leit.setAttribute("class","leitarkassi");
+	leit.setAttribute("type","text");
+	leit.setAttribute("id","myInput");
+	leit.setAttribute("placeholder","Leita...");
+	leit.style = "width:100%;font-size:2.7em;padding:20px;margin-bottom:45px;border-left:0;border-right:0;";
+	leit.addEventListener("keyup", leitin);
+	leitarkassi.append(leit);
+	    
 
 	    var popin = document.createElement("div");
 				popin.setAttribute("class","popin");
@@ -86,8 +118,7 @@
 				poptext.innerText = "Nafn tónleika\nListamaður/hópur\nSöluaðili\nStaðsetning\nDagsetningar" ;
 				poptext.style = "font-size:2.1em;margin:auto;"
 				popin.append(poptext);
-
-				console.log(typur)
+				
 				for (let e=0;e<typur.length;e++){
 					document.getElementById(typur[e]).addEventListener("click", function(){ 
 						// if allConcerts[t].eventDateName == typur[e]
@@ -131,8 +162,10 @@
 	  .catch(err => {
 	
 	  })
+
 	        	
- 
+ 		
 
         
 </script>
+</html>
